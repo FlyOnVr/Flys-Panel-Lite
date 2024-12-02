@@ -26,7 +26,6 @@ namespace StupidTemplate.Menu
 
             new ButtonInfo[] { // Settings
                 new ButtonInfo { buttonText = "Return to Main", method =() => Global.ReturnHome(), isTogglable = false, toolTip = "Returns to the main page of the menu."},
-                new ButtonInfo { buttonText = "Return to Settings", method =() => SettingsMods.EnterSettings(), isTogglable = false, toolTip = "Returns to the main settings page for the menu."},
                 new ButtonInfo { buttonText = "Right Hand", enableMethod =() => SettingsMods.RightHand(), disableMethod =() => SettingsMods.LeftHand(), toolTip = "Puts the menu on your right hand."},
                 new ButtonInfo { buttonText = "Notifications", enableMethod =() => SettingsMods.EnableNotifications(), disableMethod =() => SettingsMods.DisableNotifications(), enabled = !disableNotifications, toolTip = "Toggles the notifications."},
                 new ButtonInfo { buttonText = "FPS Counter", enableMethod =() => SettingsMods.EnableFPSCounter(), disableMethod =() => SettingsMods.DisableFPSCounter(), enabled = fpsCounter, toolTip = "Toggles the FPS counter."},
@@ -40,6 +39,13 @@ namespace StupidTemplate.Menu
 
                 new ButtonInfo { buttonText = "Noclip", method =() => MovementMods.Noclip(), isTogglable = true, toolTip = "This button doesn't have a tooltip/tutorial.."},
                 new ButtonInfo { buttonText = "Grip Noclip", method =() => MovementMods.GripNoclip(), isTogglable = true, toolTip = "This button doesn't have a tooltip/tutorial.."},
+
+                new ButtonInfo { buttonText = "Low Gravity", method =() => MovementMods.LowGravity(), isTogglable = true, toolTip = "This button doesn't have a tooltip/tutorial.."},
+                new ButtonInfo { buttonText = "High Gravity", method =() => MovementMods.HighGravity(), isTogglable = true, toolTip = "This button doesn't have a tooltip/tutorial.."},
+                new ButtonInfo { buttonText = "No Gravity", method =() => MovementMods.NoGravity(), isTogglable = true, toolTip = "This button doesn't have a tooltip/tutorial.."},
+
+                new ButtonInfo { buttonText = "Force Tag Freeze", method =() => MovementMods.ForceTagFreeze(), isTogglable = true, toolTip = "This button doesn't have a tooltip/tutorial.."},
+                new ButtonInfo { buttonText = "No Tag Freeze", method =() => MovementMods.NoTagFreeze(), isTogglable = true, toolTip = "This button doesn't have a tooltip/tutorial.."},
             },
 
             new ButtonInfo[] { // Player
@@ -67,8 +73,8 @@ namespace StupidTemplate.Menu
 
             new ButtonInfo[] { // Visual
                 new ButtonInfo { buttonText = "Return to Main", method =() => Global.ReturnHome(), isTogglable = false, toolTip = "Opens the settings for the menu."},
-                new ButtonInfo { buttonText = "Nothing Yet!", isTogglable = false},
-
+                new ButtonInfo { buttonText = "Beacons", method =() => Visual.Beacons(), isTogglable = true},
+                new ButtonInfo { buttonText = "Tracers", method =() => Visual.Tracers(), isTogglable = true},
             },
 
             new ButtonInfo[] { // Fun
@@ -78,7 +84,7 @@ namespace StupidTemplate.Menu
 
             new ButtonInfo[] { // World
                 new ButtonInfo { buttonText = "Return to Main", method =() => Global.ReturnHome(), isTogglable = false, toolTip = "Opens the settings for the menu."},
-                new ButtonInfo { buttonText = "Nothing Yet!", isTogglable = false},
+                new ButtonInfo { buttonText = "Rain", enableMethod =() => World.Rain(), disableMethod =() => World.FixRain()},
             },
 
             new ButtonInfo[] { // Safety
@@ -88,7 +94,8 @@ namespace StupidTemplate.Menu
 
             new ButtonInfo[] { // Important
                 new ButtonInfo { buttonText = "Return to Main", method =() => Global.ReturnHome(), isTogglable = false, toolTip = "Returns to the main settings page for the menu."},
-                new ButtonInfo { buttonText = "Nothing Yet!", isTogglable = false},
+                new ButtonInfo { buttonText = "Mute All", method =() => Important.MuteAll(), isTogglable = false},
+                new ButtonInfo { buttonText = "Report All", method =() => Important.ReportAll(), isTogglable = false},
             },
 
             new ButtonInfo[] { // Overpowered

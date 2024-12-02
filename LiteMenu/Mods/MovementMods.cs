@@ -48,18 +48,66 @@ namespace FlysPanelLite.Mods
 
         public static void PlatformSpam()
         {
-            if (ControllerInputPoller.instance.rightGrab || Mouse.current.rightButton.isPressed)
+            if (ControllerInputPoller.instance.leftGrab || Mouse.current.rightButton.isPressed)
             {
                 GameObject platform = GameObject.CreatePrimitive(PrimitiveType.Cube);
                 UnityEngine.Object.Destroy(platform.GetComponent<BoxCollider>());
-                platform.GetComponent<Renderer>().material.color = Color.blue;
-                platform.transform.localScale = new Vector3(0.28f, 0.015f, 0.28f);
-                platform.transform.position = GorillaTagger.Instance.rightHandTransform.position;
-                platform.transform.rotation = GorillaTagger.Instance.rightHandTransform.rotation;
+                platform.GetComponent<Renderer>().material.color = UnityEngine.Color.blue;
+                platform.transform.localScale = new UnityEngine.Vector3(0.28f, 0.015f, 0.28f);
                 platform.transform.position = GorillaTagger.Instance.leftHandTransform.position;
                 platform.transform.rotation = GorillaTagger.Instance.leftHandTransform.rotation;
                 UnityEngine.Object.Destroy(platform, 1f);
                 PhotonNetwork.RaiseEvent(69, new object[2] { platform.transform.position, platform.transform.rotation }, new RaiseEventOptions { Receivers = ReceiverGroup.Others }, SendOptions.SendReliable);
+            }
+            if (ControllerInputPoller.instance.rightGrab || Mouse.current.rightButton.isPressed)
+            {
+                GameObject platform = GameObject.CreatePrimitive(PrimitiveType.Cube);
+                UnityEngine.Object.Destroy(platform.GetComponent<BoxCollider>());
+                platform.GetComponent<Renderer>().material.color = UnityEngine.Color.blue;
+                platform.transform.localScale = new UnityEngine.Vector3(0.28f, 0.015f, 0.28f);
+                platform.transform.position = GorillaTagger.Instance.rightHandTransform.position;
+                platform.transform.rotation = GorillaTagger.Instance.rightHandTransform.rotation;
+                UnityEngine.Object.Destroy(platform, 1f);
+                PhotonNetwork.RaiseEvent(69, new object[2] { platform.transform.position, platform.transform.rotation }, new RaiseEventOptions { Receivers = ReceiverGroup.Others }, SendOptions.SendReliable);
+            }
+        }
+
+        public static void LowGravity()
+        {
+            GorillaLocomotion.Player.Instance.bodyCollider.attachedRigidbody.AddForce(UnityEngine.Vector3.up * (Time.deltaTime * (6.5f / Time.deltaTime)), ForceMode.Acceleration);
+        }
+
+        public static void NoGravity()
+        {
+            GorillaLocomotion.Player.Instance.GetComponent<Rigidbody>().AddForce(-Physics.gravity, ForceMode.Acceleration);
+        }
+
+        public static void HighGravity()
+        {
+            GorillaLocomotion.Player.Instance.bodyCollider.attachedRigidbody.AddForce(UnityEngine.Vector3.down * (Time.deltaTime * (14f / Time.deltaTime)), ForceMode.Acceleration);
+        }
+        public static void ForceTagFreeze()
+        {
+            GorillaLocomotion.Player.Instance.disableMovement = true;
+        }
+
+        public static void NoTagFreeze()
+        {
+            GorillaLocomotion.Player.Instance.disableMovement = false;
+        }
+
+        public static void Strafe()
+        {
+            Vector3 funnyDir = GorillaTagger.Instance.bodyCollider.transform.forward * GorillaLocomotion.Player.Instance.maxJumpSpeed;
+            GorillaTagger.Instance.bodyCollider.attachedRigidbody.velocity = new Vector3(funnyDir.x, GorillaTagger.Instance.bodyCollider.attachedRigidbody.velocity.y, funnyDir.z);
+        }
+
+        public static void Dash()
+        {
+            if (ControllerInputPoller.instance.rightControllerSecondaryButton || Mouse.current.rightButton.isPressed)
+            {
+                Vector3 funnyDir = GorillaTagger.Instance.bodyCollider.transform.forward * GorillaLocomotion.Player.Instance.maxJumpSpeed;
+                GorillaTagger.Instance.bodyCollider.attachedRigidbody.velocity = new Vector3(funnyDir.x, GorillaTagger.Instance.bodyCollider.attachedRigidbody.velocity.y, funnyDir.z);
             }
         }
 
